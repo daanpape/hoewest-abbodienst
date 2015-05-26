@@ -177,11 +177,12 @@
     <Content Include="Views\Abonnement\Overview.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTimeHelper.cshtml" />
     <Content Include="Views\Abonnement\Result.cshtml" />
+    <Content Include="Views\Beheer\Index.cshtml" />
+    <Content Include="Views\Beheer\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Common\CustomAttributes\" />
-    <Folder Include="Views\Beheer\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
