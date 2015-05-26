@@ -1,0 +1,14 @@
+﻿<div class="input-group date" id="valid_from_datetime">
+    <input type="text" class="form-control" id="@ViewData.ModelMetadata.PropertyName" name="@ViewData.ModelMetadata.PropertyName">
+    <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+</div>
+
+@Styles.Render("~/Content/bootstrap-datetimepicker.min.css")
+
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+        $('#@ViewData.ModelMetadata.PropertyName').datetimepicker({ format: 'YYYY-MM-DD' });
+    }, false);
+</script>
