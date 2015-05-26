@@ -1,0 +1,24 @@
+﻿@model AbonnementenDienst.Models.Magazine
+@{
+    ViewBag.Title = "Verwijder magazine";
+}
+
+<div class="container">
+    <h2>Verwijder '@Model.name'</h2>
+    <p>
+        Bent u zeker dat u het magazine @Model.name wenst te verwijderen?
+    </p>
+    <p>
+        <b>Naam: </b>@Model.name<br/>
+        <b>Uitgever: </b>@Model.publisher.name<br />
+        <b>Categorie: </b>@Model.category.name<br />
+    </p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <button type="submit" class="btn btn-success pull-right">Verwijder</button>
+        @Html.ActionLink("Terug naar overzicht", "Index")
+    }
+</div>

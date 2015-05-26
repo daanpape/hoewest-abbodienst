@@ -41,15 +41,23 @@ namespace AbonnementenDienst.Models
 
         [Column("MagazineName")]
         [Required]
-        [Display(Name = "Titel")]
+        [Display(Name = "Naam")]
         public string name { get; set; }
 
+        [Required]
+        [Display(Name = "Uitgever")]
         public int publisherID {get; set; }
+
         [ForeignKey("publisherID")]
+        [Display(Name = "Uitgever")]
         public virtual Publisher publisher { get; set; }
 
+        [Required]
+        [Display(Name = "Categorie")]
         public int categoryID {get; set; }
+
         [ForeignKey("categoryID")]
+        [Display(Name = "Categorie")]
         public virtual Category category { get; set; }
 
         [Column("MagazinePrice")]

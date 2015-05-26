@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 using AbonnementenDienst.Models;
 using System.Net;
+using System.Data.Entity;
 
 namespace AbonnementenDienst.Controllers
 {
@@ -43,6 +44,8 @@ namespace AbonnementenDienst.Controllers
         [HttpGet]
         public ActionResult Create()
         {
+            ViewBag.publisherID = new SelectList(db.Publishers, "ID", "Name");
+            ViewBag.categoryID = new SelectList(db.Categories, "ID", "Name");
             return View();
         }
 
@@ -60,6 +63,8 @@ namespace AbonnementenDienst.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.publisherID = new SelectList(db.Publishers, "ID", "Name");
+            ViewBag.categoryID = new SelectList(db.Categories, "ID", "Name");
             return View(magazine);
         }
 
@@ -88,7 +93,8 @@ namespace AbonnementenDienst.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Magazine magazine)
         {
-            db.Magazines.Remove(magazine);
+            Magazine todel = db.Magazines.Find(magazine.ID);
+            db.Magazines.Remove(todel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -108,6 +114,8 @@ namespace AbonnementenDienst.Controllers
                 return HttpNotFound();
             }
 
+            ViewBag.publisherID = new SelectList(db.Publishers, "ID", "Name");
+            ViewBag.categoryID = new SelectList(db.Categories, "ID", "Name");
             return View(magazine);
         }
 
@@ -118,8 +126,57 @@ namespace AbonnementenDienst.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Magazine magazine)
         {
-            //TODO
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                db.Entry(magazine).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.publisherID = new SelectList(db.Publishers, "ID", "Name");
+            ViewBag.categoryID = new SelectList(db.Categories, "ID", "Name");
+            return View(magazine);
         }
+
+        // Create a new category
+        [HttpGet]
+        public ViewResult CreateCategory()
+        {
+            return View();
+        }
+
+        // Save a new category
+        [HttpPost]
+        public ActionResult CreateCategory(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Categories.Add(category);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(category);
+        }
+
+        // Create a new publisher
+        [HttpGet]
+        public ViewResult CreatePublisher()
+        {
+            return View();
+        }
+
+        // Save a new publisher
+        [HttpPost]
+        public ActionResult CreatePublisher(Publisher publisher)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Publishers.Add(publisher);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(publisher);
+        }
+
     }
 }

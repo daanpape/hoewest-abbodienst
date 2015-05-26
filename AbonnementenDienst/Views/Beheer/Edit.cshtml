@@ -1,0 +1,43 @@
+﻿@model AbonnementenDienst.Models.Magazine
+@{
+    ViewBag.Title = "Bewerk magazine";
+}
+
+<div class="container">
+    <h2>Bewerk '@Model.name'</h2>
+    <p>
+        Bewerk het magazine @Model.name
+    </p>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.name)<br />
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="publisherID">Uitgever</label>
+            @Html.DropDownList("publisherID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.publisherID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label for="categoryID">Categorie</label>
+            @Html.DropDownList("categoryID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.categoryID, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price)
+            @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+        </div>
+
+        <button type="submit" class="btn btn-success pull-right">Sla wijzigingen op</button>
+        @Html.ActionLink("Terug naar overzicht", "Index")
+    }
+</div>

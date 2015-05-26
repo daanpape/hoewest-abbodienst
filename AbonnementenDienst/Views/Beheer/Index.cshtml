@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AbonnementenDienst.Models.Magazine>
+
+@{
+    ViewBag.Title = "Magazinebeheer";
+}
+
+<div class="container">
+    <h2>Magazinebeheer</h2>
+    <p>
+        Beheer de magazines eenvoudig, klik op een magazine voor meer details en om de gegevens aan de passen. 
+    </p>
+
+    <table class="table">
+        <tr>
+
+            <th>
+                Naam
+            </th>
+            <th>
+                Uitgeverij
+            </th>
+            <th>
+                Categorie
+            </th>
+            <th>
+                Prijs
+            </th>
+            <th>
+                Acties
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.publisher.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category.name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.price)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+
+    @Html.ActionLink("Voeg magazine toe", "Create", "Beheer")<br/>
+    @Html.ActionLink("Voeg uitgever toe", "CreatePublisher", "Beheer")<br/>
+    @Html.ActionLink("Voeg categorie toe", "CreateCategory", "Beheer")
+</div>

@@ -1,0 +1,15 @@
+﻿@model AbonnementenDienst.Models.Magazine
+@{
+    ViewBag.Title = "Magazine detail";
+}
+
+<div class="container">
+    <h2>Detail '@Model.name'</h2>
+    <p>
+        <b>Naam: </b>@Model.name<br/>
+        <b>Uitgever: </b>@Model.publisher.name<br />
+        <b>Categorie: </b>@Model.category.name<br />
+        <b>Prijs &euro;/mnd </b>@Model.price
+    </p>
+    @Html.ActionLink("Terug naar overzicht", "Index")
+</div>

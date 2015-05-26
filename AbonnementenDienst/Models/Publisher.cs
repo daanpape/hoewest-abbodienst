@@ -23,9 +23,11 @@ namespace AbonnementenDienst.Models
     /// </summary>
     public class PublisherMetaData
     {
+        [Display(Name = "Uitgever")]
         public int ID { get; set; }
 
-        [Display(Name = "Uitgever naam")]
+        [Required(ErrorMessage = "De uitgever moet een naam hebben")]
+        [Display(Name = "Naam*")]
         public string name { get; set; }
 
         public ICollection<Magazine> magazines { get; set; }

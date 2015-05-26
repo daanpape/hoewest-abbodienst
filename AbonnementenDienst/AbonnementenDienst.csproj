@@ -182,6 +182,8 @@
     <Content Include="Views\Beheer\Delete.cshtml" />
     <Content Include="Views\Beheer\Details.cshtml" />
     <Content Include="Views\Beheer\Edit.cshtml" />
+    <Content Include="Views\Beheer\CreateCategory.cshtml" />
+    <Content Include="Views\Beheer\CreatePublisher.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

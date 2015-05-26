@@ -25,9 +25,11 @@ namespace AbonnementenDienst.Models
     /// </summary>
     public class CategoryMetaData
     {
+        [Display(Name = "Categorie")]
         public int ID { get; set; }
         
-        [Display(Name = "Categorie naam")]
+        [Required(ErrorMessage = "De categorie moet een naam hebben")]
+        [Display(Name = "Naam*")]
         public string name { get; set; }
 
         [Display(Name = "Omschrijving")]
