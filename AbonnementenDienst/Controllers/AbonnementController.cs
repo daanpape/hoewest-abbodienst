@@ -23,13 +23,13 @@ namespace AbonnementenDienst.Controllers
         [HttpGet]
         public ViewResult Overview()
         {
-            if (TempData["subscriber"] == null)
+            if (TempData.Peek("subscriber") == null)
             {
-                ViewBag.Subscriber = new Subscriber { salutation = "Dhr", name = "Janssens", firstname = "Jan" };
+                ViewBag.subscriber = new Subscriber { salutation = "Dhr", name = "Janssens", firstname = "Jan" };
             }
             else
             {
-                ViewBag.Subscriber = (Subscriber)TempData["subscriber"];
+                ViewBag.subscriber = (Subscriber) TempData.Peek("subscriber");
             }
 
             /* Fetch list of all magazines */
@@ -39,10 +39,19 @@ namespace AbonnementenDienst.Controllers
             return View();
         }
 
-        // GET: 
+        // GET: The result 
         [HttpGet]
         public ViewResult Result()
         {
+            Subscription subscription = (Subscription) TempData["subscription"];
+            Subscriber subscriber = (Subscriber)TempData["subscriber"];
+            var magazine = db.Magazines.Find(subscription.magazineID);
+
+            /* Pass data to view */
+            ViewBag.subscription = subscription;
+            ViewBag.subscriber = subscriber;
+            ViewBag.magazine = magazine;
+
             return View();
         }
 
@@ -58,6 +67,19 @@ namespace AbonnementenDienst.Controllers
             }
 
             return View(subscriber);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Overview(Subscription subscription)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["subscription"] = subscription;
+                return RedirectToAction("Result");
+            }
+
+            return View(subscription);
         }
 
         protected override void Dispose(bool disposing)

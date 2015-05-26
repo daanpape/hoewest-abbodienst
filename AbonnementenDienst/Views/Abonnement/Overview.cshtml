@@ -4,7 +4,7 @@
 }
 
 <div class="container">
-    <h2>Hallo @ViewBag.Subscriber.salutation @ViewBag.Subscriber.firstname @ViewBag.Subscriber.name</h2>
+    <h2>Hallo @ViewBag.subscriber.firstname @ViewBag.subscriber.name</h2>
     <p>
         Bedankt dat u koos voor ons om u te abonneren op één van deze fantastische magazines.
     </p>
@@ -12,9 +12,12 @@
     {
     <h4>Stap 1: kies het magazine waarop u zich wilt abonneren</h4>
         
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
         <div class="form-group">
-            <label for="sel1">Select list:</label>
-            <select class="form-control" id="sel1">
+            <label for="sel1">Kies uw magazine*:</label>
+            <select class="form-control" id="magazineID" name="magazineID">
                 @foreach (var magazine in ViewBag.magazines)
                 {
                     <option value="@magazine.ID">@magazine.name, categorie: @magazine.category.name, uitgever: @magazine.publisher.name</option>
@@ -35,7 +38,7 @@
             @Html.ValidationMessageFor(model => model.until, "", new { @class = "text-danger" })
         </div>
     </div>
-        
-        
+
+    <button type="submit" class="btn btn-success pull-right">Abonneer nu</button>
     }
 </div>
