@@ -9,8 +9,8 @@
     <p>
         Voeg een nieuw magazine toe in de database.
     </p>
-   <div class="createform">
-       @Html.RenderPartial("CreateFormPartial.cshtml", model);
+   <div id="createform">
+       @Html.Partial("~/Views/Beheer/CreateFormPartial.cshtml", Model)
    </div>
 </div>
 

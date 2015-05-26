@@ -65,7 +65,16 @@ namespace AbonnementenDienst.Controllers
 
             ViewBag.publisherID = new SelectList(db.Publishers, "ID", "Name");
             ViewBag.categoryID = new SelectList(db.Categories, "ID", "Name");
-            return View(magazine);
+
+            /* Return partial view if it's an Ajax request */
+            if (Request.IsAjaxRequest())
+            {
+                return PartialView("CreateFormPartial", magazine);
+            }
+            else
+            {
+                return View(magazine);
+            }
         }
 
         // GET: show the delete view for a magazine 

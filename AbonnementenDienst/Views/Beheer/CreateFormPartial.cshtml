@@ -3,7 +3,7 @@
 @using (Ajax.BeginForm("Create", "Beheer", new AjaxOptions
     {
         InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "bodyrender"
+        UpdateTargetId = "createform"
     }))
 {
     @Html.AntiForgeryToken()
